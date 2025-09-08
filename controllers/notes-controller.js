@@ -1,6 +1,6 @@
 const Note = require('../models/note-model');
 
-async function seedNotes(req, res, next) {
+async function seedNotes(req, res) {
   try {
     await Note.deleteMany({});
     await Note.create(
@@ -24,45 +24,50 @@ async function seedNotes(req, res, next) {
   }
 }
 
-async function getNotes(req, res, next) {
+async function getNotes(req, res) {
   try {
-
+    const notes = await Note.find({});
+    res.status(200).json(notes);
   } catch(error) {
     console.error(error);
     res.status(400).json({ error: error.message });
   }
 }
 
-async function deleteNote(req, res, next) {
+async function deleteNote(req, res) {
   try {
-
+    const note = await Note.findByIdAndDelete(req.params.id);
+    res.status(200).json(note);
   } catch(error) {
     console.error(error);
     res.status(400).json({ error: error.message });
   }
 }
 
-async function updateNote(req, res, next) {
+async function updateNote(req, res) {
   try {
-
+    const note = await Note.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(note);
   } catch(error) {
     console.error(error);
     res.status(400).json({ error: error.message });
   }
 }
 
-async function createNote(req, res, next) {
+async function createNote(req, res) {
   try {
-
+    const note = await Note.create(req.body);
+    res.status(201).json(note);
   } catch(error) {
     console.error(error);
     res.status(400).json({ error: error.message });
   }
 }
 
-async function getNote(req, res, next) {
+async function getNote(req, res) {
   try {
-
+    const note = await Note.findById(req.params.id);
+    res.status(200).json(note);
   } catch(error) {
     console.error(error);
     res.status(400).json({ error: error.message });
