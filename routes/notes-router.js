@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const noteController = require('../controllers/notes-controller');
+// switch up later to break up routes as necessary, see notes
 
 router.get('/seed', noteController.seedNotes);
 router.get('/', noteController.getNotes);

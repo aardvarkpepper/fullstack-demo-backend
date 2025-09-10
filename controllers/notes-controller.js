@@ -2,18 +2,19 @@ const Note = require('../models/note-model');
 
 async function seedNotes(req, res) {
   try {
+    // note:  these won't necessarily appear in order
     await Note.deleteMany({});
     await Note.create(
       {
-        title: 'Title 1',
+        title: 'Title 1 (not tied to user)',
         content: 'Content for Title 1'
       },
       {
-        title: 'Title 2',
+        title: 'Title 2 (not tied to user)',
         content: 'Content for Title 2'
       },
       {
-        title: 'Title 3',
+        title: 'Title 3 (not tied to user)',
         content: 'Content for Title 3'
       }
     );
